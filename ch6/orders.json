@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "name": "멜론",
+    "status": "ready"
+  },
+  {
+    "id": 2,
+    "name": "수박",
+    "status": "not-ready"
+  },
+  {
+    "id": 3,
+    "name": "바나나",
+    "status": "ready"
+  },
+  {
+    "id": 4,
+    "name": "키위",
+    "status": "ready"
+  }
+]
