@@ -6,16 +6,26 @@ export class Order {
   get quantity() {
     return this._data.quantity;
   }
+
   get itemPrice() {
     return this._data.itemPrice;
   }
 
+  //# 할인 // 배송
+  get basePrice() {
+    return this.quantity * this.itemPrice;
+  }
+
+  get disCount() {
+    return Math.max(0, this.quantity - 500) * this.itemPrice * 0.05;
+  }
+
+  get shipping() {
+    return Math.min(this.quantity * this.itemPrice * 0.1, 100);
+  }
+
   get price() {
-    return (
-      this.quantity * this.itemPrice -
-      Math.max(0, this.quantity - 500) * this.itemPrice * 0.05 +
-      Math.min(this.quantity * this.itemPrice * 0.1, 100)
-    );
+    return this.basePrice - this.disCount + this.shipping
   }
 }
 
