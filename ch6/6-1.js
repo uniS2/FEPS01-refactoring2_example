@@ -1,33 +1,47 @@
-export function printOwing(invoice) {
-  let outstanding = 0;
-
-  console.log('***********************');
-  console.log('**** Customer Owes ****');
-  console.log('***********************');
-
-  // calculate outstanding
+//# 함수 쪼개기
+// calculate outstanding
+function calculateOutstanding(invoice) {
+  let result = 0;
   for (const o of invoice.orders) {
-    outstanding += o.amount;
+    const mount = o.amount
+    result += mount;
   }
 
-  // record due dates
+  return result;
+}
+
+// record due dates
+function recordDueDate(invoice) {
   const today = new Date();
   invoice.dueDate = new Date(
     today.getFullYear(),
     today.getMonth(),
     today.getDate() + 30,
-  );
+  )
+
+  return invoice.dueDate;
+}
+
+export function printOwing({ customer }) {
+  const outstanding = calculateOutstanding(invoice);
+  const dueDate = recordDueDate(invoice);
+
+  // print total
+  console.log('***********************');
+  console.log('**** Customer Owes ****');
+  console.log('***********************');
 
   //print details
-  console.log(`name: ${invoice.customer}`);
+  console.log(`name: ${customer}`);
   console.log(`amount: ${outstanding}`);
-  console.log(`due: ${invoice.dueDate.toLocaleDateString()}`);
+  console.log(`due: ${dueDate.toLocaleDateString()}`);
 }
 
 const invoice = {
   orders: [{ amount: 2 }, { amount: 5 }],
   customer: '사자',
 };
+
 printOwing(invoice);
 
 // 함수 추출하기 (책 6.1)
